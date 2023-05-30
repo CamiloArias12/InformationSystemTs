@@ -1,0 +1,17 @@
+{
+  "name": "InformationSystemTs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/CamiloArias12/InformationSystemTs",
+  "author": "camilo-camargo <camilocamargo49@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lerna": "^6.6.2"
+  },
+  "scripts": {
+    "dev": "lerna run dev"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

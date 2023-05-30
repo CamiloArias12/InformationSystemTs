@@ -1,0 +1,21 @@
+{
+
+   "compilerOptions": {
+      "lib": [
+         "es2020"
+      ],
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "rootDirs": ["./src"],
+      "outDir": "dist",
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "isolatedModules": true, 
+      "types": ["node"]
+   },
+   "exclude": ["node_modules"],
+   "include": ["./src/**/*"]
+}

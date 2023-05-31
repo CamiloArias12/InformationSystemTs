@@ -3,16 +3,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Navbar from "../../components/NavBar";
 import SelectField from "../../components/SelectedField";
 
-const SINGUP_GQL= gql`
-mutation ($create: AgriculturistInput!) {
-  agriculturistCreate(create: $create) {
-    identification
-    firstName
-    lastName
-    phone
-    address
-    email
-    password
+const CREATE_LOT= gql`
+mutation ($create: LotInput!) {
+  lotCreate(create: $create) {
+    id
+    name
+    width
+    long
+    postalCode
   }
 }
 `;
@@ -37,17 +35,14 @@ query GetAllMunicipality {
 
 
 
-export default function SingUp(){
+export default function CreateLot(){
 
 
 
-   const [identification,setIdentification]= useState<Number>(0)
-   const [firstName, setFirstName]= useState<String>("")
+   const [name, setName]= useState<String>("")
    const [lastName, setLastName]= useState<String>("")
    const [phone, setPhone]= useState<String>("")
    const [address, setAdress]= useState<String>("")
-   const [email, setEmail]= useState<String>("")
-   const [password,setPassword]= useState<String>("")
    const [department,setDepartment]= useState('') 
    const [departmentId,setDepartmentId]= useState(0)
    const [municipality,setMunicipality]= useState('')
@@ -55,7 +50,7 @@ export default function SingUp(){
    const [departmentOptions, setDepartmentOptions] = useState<any[]>([]);
    const [municipalityOptions, setMunicipalityOptions] = useState<any[]>([]);
    
-   const [singUp, { data: userData, loading: loadingUser, error: errorUser }] = useMutation(SINGUP_GQL);
+   const [createLot, { data: userData, loading: loadingUser, error: errorUser }] = useMutation(CREATE_LOT);
 
    const { data: departmentData, } = useQuery(DEPARTMENT_GQL);
    const { data: municipalityData } = useQuery(MUNICIPALITY_GQL);
@@ -112,18 +107,15 @@ export default function SingUp(){
    const handleLogin= () =>{
 
 	 console.log(departmentId, municipalityId) 
-	 singUp(
+	 createLot(
 	 {
 	 variables:{
 	    create: {
-	       identification:identification,
-	       firstName:firstName,
+	       name:name,
 	       lastName:lastName,
 	       phone:phone,
 	       address:address,
-	       email :email,
-	       password:password,
-	       department:1,
+	       department:departmentId,
 	       municipality:municipalityId
 
 	    }
@@ -145,39 +137,25 @@ export default function SingUp(){
       <Navbar />
       <div className="login">
 	<form> 
-	 <label>Cedula</label>
+	 <label>Nombre</label>
 	 <input
 	   onChange={(e) => setIdentification(parseFloat(e.target.value))} 
 	    />
-	 <label>Nombres</label>
+	 <label>Ancho</label>
 	 <input
-	   onChange={(e) => setFirstName(e.target.value)} 
+	   onChange={(e) => setName(e.target.value)} 
 	    />
 	 
-	 <label>Apellidos</label>
+	 <label>Largo</label>
 	 <input
 	   onChange={(e) => setLastName(e.target.value)} 
 	    />
 	 
-	 <label>Telefono</label>
+	 <label>Codigo Postal</label>
 	 <input
 	   onChange={(e) => setPhone(e.target.value)} 
 	    />
 
-	 <label>Direccion</label>
-	 <input
-	   onChange={(e) => setAdress(e.target.value)} 
-	    />
-
-	 <label>Correo electronico</label>
-	 <input
-	   onChange={(e) => setEmail(e.target.value)} 
-	    />
-	 <label>Contrasena</label>
-	 <input
-	    type="password"
-	   onChange={(e) => setPassword(e.target.value)} 
-	    />
        <SelectField
         label="Departamento"
         value={department}
@@ -185,7 +163,7 @@ export default function SingUp(){
         onChange={handleDepartmentChange}
 	 />
        <SelectField
-        label="municipality"
+        label="Municipio"
         value={municipality}
         options={municipalityOptions}
         onChange={handleMunicipalityChange}

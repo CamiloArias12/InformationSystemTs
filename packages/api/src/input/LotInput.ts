@@ -3,7 +3,8 @@ import type { ILot } from "../interfaces/ILot.js";
 
 @InputType()
 export class LotInput implements ILot {
-
+   @Field()
+   name: string;
   @Field()
    width: number; 
 
@@ -16,4 +17,13 @@ export class LotInput implements ILot {
 
    @Field()
    agriculturist: number
+
+   @Field()
+   department:number
+
+   @Field()
+   municipality:number
+
+
+   
 }

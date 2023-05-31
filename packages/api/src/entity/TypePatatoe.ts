@@ -14,7 +14,7 @@ export default class TypePatatoe {
   id: number;
 
   @Field()
-  @Column()
+  @Column({unique:true})
   name: string;
 
    @OneToMany(() => Seed, (seed) => seed.patatoe)

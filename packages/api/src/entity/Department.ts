@@ -18,7 +18,7 @@ export default  class Department implements IDepartment{
     id: number
 
     @Field()
-    @Column()
+    @Column({unique:true})
     name: string
 
  

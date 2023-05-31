@@ -9,8 +9,9 @@ export class MunicipalityResolver{
 
    @Query(()=> [Municipality])
    async getAllMunicipality(){
+      console.log("Municipalitys")
       let municipality = new Municipality()
-      return await municipality.findMunicipality()
+      return await municipality.findMunicipalities()
    }
 
    @Query(()=> Municipality)

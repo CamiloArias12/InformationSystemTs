@@ -16,6 +16,11 @@ export default class Lot implements ILot{
   @Field() 
   @PrimaryGeneratedColumn()
   id: number;
+ 
+  @Field()
+  @Column()
+  name: string;
+
 
 
   @Field()
@@ -49,16 +54,19 @@ export default class Lot implements ILot{
    }
 
 
-   async createLot(): Promise <void>{
+   async createLot(): Promise <Lot| null>{
        try {
     await this.repository.save(this);
+    return this.findLot()
     console.log("Lot saved successfully");
   } catch (error) {
     console.error("Error saving lot:", error);
+    return null;
   }
 }
 
    async findLot(): Promise <Lot | null>{
+      console.log(this.id)
       return await this.repository.findOneBy({id: this.id});
    }
 

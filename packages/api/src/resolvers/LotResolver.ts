@@ -4,6 +4,8 @@ import {GraphQLError}from "graphql"
 import { LotInput } from "../input/LotInput.js";
 import  Agriculturist  from "../entity/Agriculturist.js";
 import  Seed  from "../entity/Seed.js";
+import Department from "../entity/Department.js";
+import Municipality from "../entity/Municipality.js";
 
 
 @Resolver(Lot)
@@ -26,9 +28,15 @@ export class LotResolver{
    async lotCreate(@Arg("create") create: LotInput,  ){
        let agriculturist =new Agriculturist()
        let lot =new Lot(create)
+       let department= new Department()
+       let municipality= new Municipality()
+       department.id=create.department
+       municipality.id=create.municipality
        agriculturist.identification=create.agriculturist
-	 await lot.createLot()
-       return  await lot.findLot()
+	 lot.municipality=municipality
+	 lot.department=department
+	 lot.agriculturist=agriculturist
+      return  await lot.createLot()
    }
 
 }

@@ -18,7 +18,7 @@ export default  class Municipality implements IMunicipality{
     id: number
 
     @Field()
-    @Column()
+    @Column({unique:true})
     name: string
 
 
@@ -48,7 +48,10 @@ export default  class Municipality implements IMunicipality{
    async findMunicipality(): Promise <Municipality | null>{
       return await this.repository.findOneBy({id: this.id});
    }
-   
+   async findMunicipalities(): Promise <Municipality[] | null>{
+      return await this.repository.find();
+   }
+
 
 }
 

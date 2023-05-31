@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { Form,Button,  } from "react-bootstrap";
+import Navbar from "../../components/NavBar";
 
 const LOGIN_GQL = gql`
    mutation ($validationAgriculturist: AgriculturistLoginInput!) {
@@ -31,25 +31,26 @@ export default function Login (){
    }
 
 
-
    return (
+      
+      <>
+      <Navbar/>
       <div className="login">
-	<Form> 
-	 <Form.Label>Correo electronico</Form.Label>
-	 <Form.Control
+	 <label>Correo electronico</label>
+	 <input
 	   onChange={(e) => setEmail(e.target.value)} 
 	    />
-	 <Form.Label>Contrasena</Form.Label>
-	 <Form.Control
+	 <label>Contrasena</label>
+	 <input
 	    type="password"
 	   onChange={(e) => setPassword(e.target.value)} 
 	    />
-	<Button
+	<button
 	 onClick={handleLogin}
-	>Iniciar sesion </Button> 
+	>Iniciar sesion </button> 
 
-      </Form>
       </div>
+      </>
 
    );
 }

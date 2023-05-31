@@ -1,6 +1,6 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Form,Button,  } from "react-bootstrap";
+import { Form,Button, Alert,  } from "react-bootstrap";
 import Navbar from "../../components/NavBar";
 import SelectField from "../../components/SelectedField";
 
@@ -58,10 +58,9 @@ export default function SingUp(){
    
    const [singUp, { data: userData, loading: loadingUser, error: errorUser }] = useMutation(SINGUP_GQL);
 
-   const { data: departmentData, loading: departmentLoading, error: departmentError } = useQuery(DEPARTMENT_GQL);
-   const { data: municipalityData, loading: municipalityLoading, error: municipalityError } = useQuery(MUNICIPALITY_GQL);
+   const { data: departmentData, } = useQuery(DEPARTMENT_GQL);
+   const { data: municipalityData } = useQuery(MUNICIPALITY_GQL);
 
- 
 
   useEffect(() => {
     if (departmentData && departmentData.getAllDepartment) {
@@ -132,7 +131,12 @@ export default function SingUp(){
 	 }
 
 	 }
-      )
+      ).then(() => {
+
+	 alert("El agricultor ha sido registrado"); 
+       }).catch(()=> {
+	 alert("El agricultor o corre ya existe"); 
+      });
 
       
    }

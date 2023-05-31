@@ -2,23 +2,41 @@
 import './App.css'
 import { ApolloClient, ApolloProvider, InMemoryCache,gql } from '@apollo/client'
 
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route,Routes,BrowserRouter as Router, createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from './pages/login/Login';
+import Navbar from './components/NavBar';
+import SingUp from './pages/singup/SingUp';
+import CreatePatatoe from './pages/typePatatoe/TypePatatoe';
 
 const client =new ApolloClient(
    {
-      uri:'http://192.168.43.17:8080',
+      uri:'http://localhost:8080',
       cache: new InMemoryCache(),
    }
 )
+const App = () => {
 
-function App() {
-
-  return (
-    <ApolloProvider client={client}>
-      <Login />
-    </ApolloProvider>
-  )
+   const router = createBrowserRouter([
+      {
+	 path:"/login",
+	 element: <Login />
+      },
+      {
+	 path:"/singup",
+	 element: <SingUp/>
+      },
+      {
+	 path:"/patatoe",
+	 element:<CreatePatatoe/>
+      }
+   ])
+  
+     return (
+      <ApolloProvider client={client}>
+	 <RouterProvider router={router}/>
+      </ApolloProvider>
+     ); 
 }
+
 
 export default App

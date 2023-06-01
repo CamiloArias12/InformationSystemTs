@@ -10,12 +10,13 @@ export type GlobalStorageStateProps = {
 
 export type GlobalStorageContextProps = {
    state: GlobalStorageStateProps;
-   dispatch: React.Dispatch<{state: GlobalStorageStateProps, action: string}>;
+   dispatch: React.Dispatch<{ state: GlobalStorageStateProps, action: string }>;
 };
 export const GlobalStorageContext = createContext<GlobalStorageContextProps | {}>({});
 
-function reducer(state: GlobalStorageStateProps, action: string): GlobalStorageStateProps {
-   return state;
+// TODO: Fix inconsistenci with parameters
+function reducer(_: any, newState: any): GlobalStorageStateProps {
+   return {...newState?.state};
 }
 
 export const GlobalStorage = ({ children }: GlobalStorageProps) => {

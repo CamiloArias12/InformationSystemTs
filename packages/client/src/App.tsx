@@ -13,6 +13,7 @@ import NavBarLot from './components/NavBar/NavLot';
 import NavBarSeed from './components/NavBar/NavSeed';
 import NavBarPatatoe from './components/NavBar/NavPatatoe';
 import NavBarProduction from './components/NavBar/NavProduction';
+import { GlobalStorage } from './storage/GlobalStorage';
 
 const client =new ApolloClient(
    {
@@ -77,9 +78,11 @@ const App = () => {
    ])
   
      return (
-      <ApolloProvider client={client}>
-	 <RouterProvider router={router}/>
-      </ApolloProvider>
+      <GlobalStorage>
+	 <ApolloProvider client={client}>
+	    <RouterProvider router={router}/>
+	 </ApolloProvider>
+      </GlobalStorage>
      ); 
 }
 

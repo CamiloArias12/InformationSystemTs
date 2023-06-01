@@ -17,6 +17,11 @@ export default class TypePatatoe {
   @Column({unique:true})
   name: string;
 
+  @Field()
+  @Column()
+   description: string;
+
+
    @OneToMany(() => Seed, (seed) => seed.patatoe)
     seeds: Relation<Seed>[]
 

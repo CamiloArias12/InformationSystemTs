@@ -16,7 +16,7 @@ export default class Production  implements IProduction{
   id: number;
 
   @Field()
-  @Column()
+  @Column({unique:true, type:'date'})
   date: Date;
 
    @Field()

@@ -65,14 +65,29 @@ export default class Lot implements ILot{
   }
 }
 
-   async findLot(): Promise <Lot | null>{
-      console.log(this.id)
+   async findLot(): Promise <|Lot | null>{
       return await this.repository.findOneBy({id: this.id});
+      
+   }
+
+   async findLotAgriculturist():Promise<Lot[] | null>{
+
+      return await this.repository.find(
+	 {
+	    where:{
+	       agriculturist:{
+		     identification:this.agriculturist.identification
+	       } 
+	    }
+	 }
+      )
    }
 
     async findLots(): Promise <Lot[] | null>{
       return await this.repository.find();
       }
+
+   
 
 }
 

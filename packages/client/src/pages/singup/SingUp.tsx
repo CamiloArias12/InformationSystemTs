@@ -142,7 +142,6 @@ export default function SingUp(){
 
    return (
       <>
-      <Navbar />
       <div className="login">
 	<form> 
 	 <label>Cedula</label>

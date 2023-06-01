@@ -5,13 +5,15 @@ export default function Navbar() {
     <nav>
       <ul>
         <li>
-          <Link to="/login">Log in</Link>
+          <Link to="login">Iniciar sesion</Link>
         </li>
         <li>
-          <Link to="/singup">Sign up</Link>
+          <Link to="singup">Registrarse</Link>
         </li>
       </ul>
     </nav>
   );
 }
+
+
 

@@ -12,9 +12,12 @@ import Municipality from "../entity/Municipality.js";
 export class LotResolver{
 
    @Query(()=> [Lot])
-   async getAllLot(){
+   async getAllLot(@Arg("agriculturist")identifacation:number){
       let lot= new Lot()
-      return await lot.findLots()
+      let agriculturist=new Agriculturist()
+      agriculturist.identification=identifacation
+      lot.agriculturist=agriculturist
+      return await lot.findLotAgriculturist()
    }
 
    @Query(()=> Lot)

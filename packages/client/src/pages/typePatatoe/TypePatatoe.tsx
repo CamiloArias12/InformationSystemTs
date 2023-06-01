@@ -21,9 +21,6 @@ export default function CreatePatatoe(){
   
    const [singUp, { data: userData, loading: loadingUser, error: errorUser }] = useMutation(CREATE_PATATOE);
 
-
-
-
    const handle= () =>{
 
 	 singUp(

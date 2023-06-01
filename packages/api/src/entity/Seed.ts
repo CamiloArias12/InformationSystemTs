@@ -18,7 +18,7 @@ export default class Seed  implements ISeed{
   id: number;
 
   @Field()
-  @Column()
+  @Column({unique:true, type:'date'})
   date: Date;
 
    @ManyToOne(() => Lot, (lot) => lot.seeds)

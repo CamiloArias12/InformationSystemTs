@@ -1,6 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import Navbar from "../../components/NavBar";
 
 const LOGIN_GQL = gql`
    mutation ($validationAgriculturist: AgriculturistLoginInput!) {
@@ -34,7 +33,6 @@ export default function Login (){
    return (
       
       <>
-      <Navbar/>
       <div className="login">
 	 <label>Correo electronico</label>
 	 <input

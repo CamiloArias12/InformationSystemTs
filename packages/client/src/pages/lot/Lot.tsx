@@ -1,6 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, useEffect, useState } from "react";
-import Navbar from "../../components/NavBar";
 import SelectField from "../../components/SelectedField";
 
 const CREATE_LOT= gql`
@@ -40,9 +39,9 @@ export default function CreateLot(){
 
 
    const [name, setName]= useState<String>("")
-   const [lastName, setLastName]= useState<String>("")
-   const [phone, setPhone]= useState<String>("")
-   const [address, setAdress]= useState<String>("")
+   const [width, setWidth]= useState<Number>(0)
+   const [long, setLong]= useState<Number>(0)
+   const [postalCode, setPostalCode]= useState<Number>(0)
    const [department,setDepartment]= useState('') 
    const [departmentId,setDepartmentId]= useState(0)
    const [municipality,setMunicipality]= useState('')
@@ -112,21 +111,21 @@ export default function CreateLot(){
 	 variables:{
 	    create: {
 	       name:name,
-	       lastName:lastName,
-	       phone:phone,
-	       address:address,
+	       width:width,
+	       long:long,
+	       postalCode:postalCode,
 	       department:departmentId,
-	       municipality:municipalityId
-
+	       municipality:municipalityId,
+	       agriculturist:123
 	    }
 	 }
 
 	 }
       ).then(() => {
 
-	 alert("El agricultor ha sido registrado"); 
+	 alert("El lote ha sido registrado"); 
        }).catch(()=> {
-	 alert("El agricultor o corre ya existe"); 
+	 alert("El lote ya existe"); 
       });
 
       
@@ -134,26 +133,25 @@ export default function CreateLot(){
 
    return (
       <>
-      <Navbar />
       <div className="login">
 	<form> 
 	 <label>Nombre</label>
 	 <input
-	   onChange={(e) => setIdentification(parseFloat(e.target.value))} 
+	   onChange={(e) => setName(e.target.value)} 
 	    />
 	 <label>Ancho</label>
 	 <input
-	   onChange={(e) => setName(e.target.value)} 
+	   onChange={(e) => setWidth(parseFloat(e.target.value))} 
 	    />
 	 
 	 <label>Largo</label>
 	 <input
-	   onChange={(e) => setLastName(e.target.value)} 
+	   onChange={(e) => setLong(parseFloat(e.target.value))} 
 	    />
 	 
 	 <label>Codigo Postal</label>
 	 <input
-	   onChange={(e) => setPhone(e.target.value)} 
+	   onChange={(e) => setPostalCode(parseFloat(e.target.value))} 
 	    />
 
        <SelectField
@@ -172,7 +170,7 @@ export default function CreateLot(){
 
 	<button
 	 onClick={handleLogin}
-	>Iniciar sesion </button> 
+	>Crear </button> 
 	       </form>
       </div>
       </>

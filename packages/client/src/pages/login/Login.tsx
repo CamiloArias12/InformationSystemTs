@@ -17,9 +17,10 @@ export default function Login (){
    const globalStorage = useContext(GlobalStorageContext) as GlobalStorageContextProps;
 
 
+   console.log(globalStorage.state);
    if(data){
       //TODO: Set the token id
-      console.log(data);
+      globalStorage.dispatch({state: {id: data?.agriculturistValidate?.identification}, action: "changeId"});
    }
 
    const handleLogin= () =>{

@@ -20,11 +20,7 @@ export default function Login (){
    const [errorLogin,setErrorLogin]=useState<Boolean>(false)
 
 
-	 console.log(loading)
-   if(data){
-	 globalStorage.dispatch({state: {id: data?.agriculturistValidate?.identification}, action: "changeId"});
-	 navigate("/dashboard")
-   } 
+
 
    const handleLogin= () =>{
       login(
@@ -36,12 +32,16 @@ export default function Login (){
 	    }
 	 }
 
+	 }).then((response) =>{
+	    
+	 globalStorage.dispatch({state: {id:response.data?.agriculturistValidate?.identification}, action: "changeId"})
+
+	 }).then(()=>{
+	    console.log(globalStorage.state.id)
+	    navigate('/dashboard')
 	 })
 
-      if(!data){
 	 
-      }
-
    }
 
    return (

@@ -1,5 +1,4 @@
 
-import './App.css'
 import { ApolloClient, ApolloProvider, InMemoryCache,gql } from '@apollo/client'
 
 import { Route,Routes,BrowserRouter as Router, createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -8,12 +7,12 @@ import SingUp from './pages/singup/SingUp';
 import CreatePatatoe from './pages/typePatatoe/TypePatatoe';
 import CreateLot from './pages/lot/Lot';
 import Home from './pages/home/Home';
-import NavbarDashboard from './components/NavBar/DashBoard';
 import NavBarLot from './components/NavBar/NavLot';
 import NavBarSeed from './components/NavBar/NavSeed';
 import NavBarPatatoe from './components/NavBar/NavPatatoe';
 import NavBarProduction from './components/NavBar/NavProduction';
 import { GlobalStorage } from './storage/GlobalStorage';
+import NavbarDashboard from './pages/dashboard/DashBoard';
 
 const client =new ApolloClient(
    {
@@ -47,28 +46,77 @@ const App = () => {
 	       path:"lot",
 	       element: <NavBarLot />,
 	       children: [
-	       {
-		  path:"createLot",
-		  element: <CreateLot />,
-	       },
-	       {
-		  path:"singup",
-		  element: <SingUp/>
-	       },
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+		  {
+		     path:"singup",
+		     element: <SingUp/>
+		  },
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+
 	    ]
 
 	    },
 	    {
 	       path:"seed",
-	       element: <NavBarSeed/>
+	       element: <NavBarSeed/>,
+	       children: [
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+		  {
+		     path:"singup",
+		     element: <SingUp/>
+		  },
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+		  ]
 	    },
-{
+	    {
 	       path:"patatoe",
-	       element: <NavBarPatatoe/>
+	       element: <NavBarPatatoe/>,
+	       children: [
+		  {
+		     path:"createLot",
+		     element: <CreatePatatoe />,
+		  },
+		  {
+		     path:"singup",
+		     element: <SingUp/>
+		  },
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+		  ]
+
 	    },
-	  {
+	    {
 	       path:"production",
 	       element: <NavBarProduction />,
+	       children: [
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+		  {
+		     path:"singup",
+		     element: <SingUp/>
+		  },
+		  {
+		     path:"createLot",
+		     element: <CreateLot />,
+		  },
+		  ]
+
 	    },
 
 	    ]

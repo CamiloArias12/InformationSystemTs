@@ -1,6 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { ChangeEvent, useEffect, useState } from "react";
-import Navbar from "../../components/NavBar";
 import SelectField from "../../components/SelectedField";
 
 const SINGUP_GQL= gql`
@@ -42,16 +41,16 @@ export default function SingUp(){
 
 
    const [identification,setIdentification]= useState<Number>(0)
-   const [firstName, setFirstName]= useState<String>("")
-   const [lastName, setLastName]= useState<String>("")
-   const [phone, setPhone]= useState<String>("")
-   const [address, setAdress]= useState<String>("")
-   const [email, setEmail]= useState<String>("")
-   const [password,setPassword]= useState<String>("")
-   const [department,setDepartment]= useState('') 
-   const [departmentId,setDepartmentId]= useState(0)
-   const [municipality,setMunicipality]= useState('')
-   const [municipalityId,setMunicipalityId]= useState(0)
+   const [firstName, setFirstName]= useState<string>('')
+   const [lastName, setLastName]= useState<string>('')
+   const [phone, setPhone]= useState<string>('')
+   const [address, setAdress]= useState<string>('')
+   const [email, setEmail]= useState<String>('')
+   const [password,setPassword]= useState<String>('')
+   const [department,setDepartment]= useState<string>('') 
+   const [departmentId,setDepartmentId]= useState<Number>(0)
+   const [municipality,setMunicipality]= useState<string>('')
+   const [municipalityId,setMunicipalityId]= useState<Number>(0)
    const [departmentOptions, setDepartmentOptions] = useState<any[]>([]);
    const [municipalityOptions, setMunicipalityOptions] = useState<any[]>([]);
    
@@ -102,6 +101,7 @@ export default function SingUp(){
 
 
    const handleDepartmentChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setMunicipality("");
     setDepartment(event.target.value);
    };
 
@@ -141,62 +141,73 @@ export default function SingUp(){
    }
 
    return (
-      <>
-      <div className="login">
-	<form> 
-	 <label>Cedula</label>
-	 <input
-	   onChange={(e) => setIdentification(parseFloat(e.target.value))} 
-	    />
-	 <label>Nombres</label>
-	 <input
-	   onChange={(e) => setFirstName(e.target.value)} 
-	    />
-	 
-	 <label>Apellidos</label>
-	 <input
-	   onChange={(e) => setLastName(e.target.value)} 
-	    />
-	 
-	 <label>Telefono</label>
-	 <input
-	   onChange={(e) => setPhone(e.target.value)} 
-	    />
+   <div>
+      <div className="flex  bg-img-bg bg-cover rounded-lg m-3 w-auto items-center justify-center">
+	 <div className="flex  bg-white  items-center justify-center p-10 rounded-lg  m-10">
+	     
+	       <div className="flex flex-col ">	 
+	            <h5 className="text-center font-bold py-5">Registrarse</h5> 
+	               <label className="block py-2">Cedula</label>
+	               <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 md:w-[259px] " onChange={(e) => setIdentification(parseFloat(e.target.value))} />
+	            <div className=" flex flex-col md:flex-row md:py-6">
+		     <div className="flex flex-col">	
+	                <label className="py-2">Nombres</label>
+	                <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " onChange={(e) => setFirstName(e.target.value)} />
+		     </div>
+		     <div className="flex flex-col md:pl-12">
+	                <label className="py-2">Apellidos</label>
+	                <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " onChange={(e) => setLastName(e.target.value)} />
+		     </div>
+	            </div>
+	            <div className="  flex flex-col md:flex-row md:pb-6">
+		     <div className="flex flex-col">
+	               <label className="py-2">Telefono</label>
+	               <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " onChange={(e) => setPhone(e.target.value)} />
+		     </div>
+		     <div className="flex flex-col md:pl-12">
+	               <label className="py-2">Direccion</label>
+	               <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " onChange={(e) => setAdress(e.target.value)} />
+		     </div>
+	            </div>   
+	            <div className="flex flex-col md:w-[259px] md:pb-6">
+	               <label className="py-2">Correo electronico</label>
+	               <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " onChange={(e) => setEmail(e.target.value)} />
+	            </div>
+	            <div className=" flex flex-col  md:flex-row  md:pb-6 ">
+		     <div className="flex flex-col">
+	               <label className="py-2">Contrasena</label>
+	               <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " type="password" onChange={(e) => setPassword(e.target.value)} />
+		     </div>
+		     <div className="flex flex-col md:pl-12">
+	               <label className="py-2">Confirmacion contraasena</label>
+	               <input className="rounded-[12px] bor bg-[#eceded] h-10 px-2 border-2 " type="password" onChange={(e) => setPassword(e.target.value)} />
+		     </div>
+	            </div>
 
-	 <label>Direccion</label>
-	 <input
-	   onChange={(e) => setAdress(e.target.value)} 
-	    />
+	            <div className="md:pb-8 ">
+	               <SelectField
+	        	  label="Departamento"
+	        	  value={department}
+	        	  options={departmentOptions}
+	        	  onChange={handleDepartmentChange}
+	               />
+		    </div>
+	            <div className="">
+	               <SelectField
+	        	  label="Municipio"
+	        	  value={municipality}
+	        	  options={municipalityOptions}
+	        	  onChange={handleMunicipalityChange}
+	               />
+	            </div>
 
-	 <label>Correo electronico</label>
-	 <input
-	   onChange={(e) => setEmail(e.target.value)} 
-	    />
-	 <label>Contrasena</label>
-	 <input
-	    type="password"
-	   onChange={(e) => setPassword(e.target.value)} 
-	    />
-       <SelectField
-        label="Departamento"
-        value={department}
-        options={departmentOptions}
-        onChange={handleDepartmentChange}
-	 />
-       <SelectField
-        label="municipality"
-        value={municipality}
-        options={municipalityOptions}
-        onChange={handleMunicipalityChange}
-	 />
+		    <div className="flex  justify-center py-10">
+		     <button onClick={handleLogin}className="bg-[#0CB3E8] text-white  px-10 py-3 rounded-lg hover:shadow-lg " >Aceptar </button> 
+		    </div>
 
-
-	<button
-	 onClick={handleLogin}
-	>Iniciar sesion </button> 
-	       </form>
+	           </div>
+	        </div>
       </div>
-      </>
-
+   </div>
    );
 }

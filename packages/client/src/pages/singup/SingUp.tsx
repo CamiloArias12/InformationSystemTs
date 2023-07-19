@@ -141,6 +141,7 @@ export default function SingUp(){
    }
 
    return (
+
    <div>
       <div className="flex  bg-img-bg bg-cover rounded-lg m-3 w-auto items-center justify-center">
 	 <div className="flex  bg-white  items-center justify-center p-10 rounded-lg  m-10">
